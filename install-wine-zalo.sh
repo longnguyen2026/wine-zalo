@@ -98,7 +98,9 @@ echo "$ZALO_EXE"
 # Desktop Shortcut
 ########################################################################
 
-mkdir -p "$HOME/Desktop"
+DESKTOP_DIR=$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Desktop")
+
+mkdir -p "$DESKTOP_DIR"
 
 cat > "$DESKTOP_DIR/Zalo.desktop" <<EOF
 [Desktop Entry]
@@ -112,9 +114,6 @@ Terminal=false
 StartupNotify=true
 Categories=Network;Chat;
 EOF
-
-DESKTOP_DIR=$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Desktop")
-mkdir -p "$DESKTOP_DIR"
 
 chmod +x "$DESKTOP_DIR/Zalo.desktop"
 
