@@ -113,7 +113,12 @@ StartupNotify=true
 Categories=Network;Chat;
 EOF
 
-chmod +x "$HOME/Desktop/Zalo.desktop"
+DESKTOP_DIR=$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Desktop")
+
+chmod +x "$DESKTOP_DIR/Zalo.desktop"
+
+rm -f "$DESKTOP_DIR/Zalo.lnk"
+rm -f "$DESKTOP_DIR/Zalo.lnk.desktop"
 
 ########################################################################
 # Linux Mint Menu
