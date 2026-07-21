@@ -83,7 +83,8 @@ echo "Searching for Zalo.exe..."
 sleep 3
 
 ZALO_EXE=$(find "$PREFIX/drive_c/users/$USER/AppData/Local/Programs/Zalo" \
--type f -name "Zalo.exe" | grep -v "/plugins/" | head -n1)
+-type f -name "Zalo.exe" 2>/dev/null | grep -v "/plugins/" | head -n1)
+
 if [ -z "$ZALO_EXE" ]; then
     zenity --error \
         --title="Zalo Installer" \
