@@ -100,7 +100,7 @@ echo "$ZALO_EXE"
 
 mkdir -p "$HOME/Desktop"
 
-cat > "$HOME/Desktop/Zalo.desktop" <<EOF
+cat > "$DESKTOP_DIR/Zalo.desktop" <<EOF
 [Desktop Entry]
 Version=1.0
 Type=Application
@@ -114,6 +114,7 @@ Categories=Network;Chat;
 EOF
 
 DESKTOP_DIR=$(xdg-user-dir DESKTOP 2>/dev/null || echo "$HOME/Desktop")
+mkdir -p "$DESKTOP_DIR"
 
 chmod +x "$DESKTOP_DIR/Zalo.desktop"
 
