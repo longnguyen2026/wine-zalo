@@ -78,11 +78,25 @@ echo -e "${YELLOW}>> Running Zalo Installer...${NC}"
 wine "$ZALO"
 
 echo
-echo "Searching Zalo.exe..."
+echo "Searching for Zalo.exe..."
 
-ZALO_EXE=$(find "$PREFIX/drive_c" -iname "Zalo.exe" | head -n1)
+sleep 3
 
-if [ -n "$ZALO_EXE" ]; then
+ZALO_EXE=$(find "$PREFIX/drive_c" -type f -iname "Zalo.exe" | head -n1)
+
+if [ -z "$ZALO_EXE" ]; then
+    zenity --error \
+        --title="Zalo Installer" \
+        --text="Không tìm thấy Zalo.exe.\nCó thể bạn chưa hoàn tất cài đặt."
+    exit 1
+fi
+
+echo "Found:"
+echo "$ZALO_EXE"
+
+########################################################################
+# Desktop Shortcut
+########################################################################
 
 mkdir -p "$HOME/Desktop"
 
@@ -91,22 +105,53 @@ cat > "$HOME/Desktop/Zalo.desktop" <<EOF
 Version=1.0
 Type=Application
 Name=Zalo
+Comment=Zalo Messenger
 Exec=env WINEPREFIX=$PREFIX wine "$ZALO_EXE"
 Icon=wine
 Terminal=false
-Categories=Network;
+StartupNotify=true
+Categories=Network;Chat;
 EOF
 
 chmod +x "$HOME/Desktop/Zalo.desktop"
 
-echo -e "${GREEN}Shortcut created on Desktop.${NC}"
+########################################################################
+# Linux Mint Menu
+########################################################################
 
-else
+mkdir -p "$HOME/.local/share/applications"
 
-echo -e "${RED}Không tìm thấy Zalo.exe.${NC}"
-echo "Có thể Zalo chưa cài xong."
+cat > "$HOME/.local/share/applications/Zalo.desktop" <<EOF
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Zalo
+Comment=Zalo Messenger
+Exec=env WINEPREFIX=$PREFIX wine "$ZALO_EXE"
+Icon=wine
+Terminal=false
+StartupNotify=true
+Categories=Network;Chat;
+EOF
 
-fi
+chmod +x "$HOME/.local/share/applications/Zalo.desktop"
+
+update-desktop-database "$HOME/.local/share/applications" >/dev/null 2>&1 || true
+
+########################################################################
+# Finish
+########################################################################
+
+zenity --info \
+--width=420 \
+--title="Zalo Installer" \
+--text="🎉 Cài đặt Zalo hoàn tất!
+
+✓ Đã tạo biểu tượng Desktop.
+
+✓ Đã thêm vào Menu Linux Mint.
+
+Bạn có thể mở Zalo từ Desktop hoặc Menu."
 
 echo
-echo -e "${GREEN}DONE!${NC}"
+echo "Done."
