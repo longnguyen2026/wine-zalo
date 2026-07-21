@@ -7,6 +7,5 @@ bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/wine-zalo/mai
 ## Update Zalo (cần tải zalo mới về đặt trong thư mục Download với tên ZaloSetup.exe
 
 ```bash
-chmod +x update-zalo.sh
-./update-zalo.sh
+bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/wine-zalo/main/update-zalo.sh)
 ```
