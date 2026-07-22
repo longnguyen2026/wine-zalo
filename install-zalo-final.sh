@@ -6,7 +6,6 @@
 set -e
 
 PREFIX="$HOME/.wine-zalo"
-ZALO="$HOME/Downloads/ZaloSetup.exe"
 
 GREEN="\033[1;32m"
 RED="\033[1;31m"
