@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #
-# Zalo Installer for Linux Mint
-# Author: LongNguyen2026
+# Zalo Installer for Linux Mint: version 2.0
+# Author: Long Nguyen
 #
 
 set -e
