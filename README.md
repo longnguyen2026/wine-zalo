@@ -1,9 +1,9 @@
-## Cài đặt Wine và Zalo tự động (bản Ver1)
+## Cài đặt Wine và Zalo tự động (bản Version 2.1)
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/wine-zalo/main/install-wine-zalo.sh)
 ```
-## Cài đặt Wine và Zalo tự động (bản Ver2-tìm chọn file zalo.exe để cài nếu không tìm thấy trong thư mục Download)
+## Cài đặt Wine và Zalo tự động (bản Version 2.1-tìm chọn file zalo.exe để cài nếu không tìm thấy trong thư mục Download)
 
 ```bash
 bash <(curl -fsSL https://raw.githubusercontent.com/longnguyen2026/wine-zalo/main/install-zalo-final.sh)
