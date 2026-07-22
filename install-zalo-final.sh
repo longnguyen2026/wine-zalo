@@ -74,7 +74,48 @@ echo -e "${YELLOW}>> Installing Core Fonts...${NC}"
 winetricks -q corefonts
 
 echo -e "${YELLOW}>> Running Zalo Installer...${NC}"
-wine "$ZALO"
+echo -e "${YELLOW}>> Finding ZaloSetup.exe...${NC}"
+
+INSTALLER="$HOME/Downloads/ZaloSetup.exe"
+
+if [ ! -f "$INSTALLER" ]; then
+    INSTALLER=$(zenity --file-selection \
+        --title="Chọn file ZaloSetup.exe" \
+        --filename="$HOME/" \
+        --file-filter="ZaloSetup.exe | ZaloSetup.exe *.exe")
+
+    if [ -z "$INSTALLER" ]; then
+        zenity --warning \
+            --title="Zalo Installer" \
+            --text="Bạn chưa chọn file ZaloSetup.exe."
+        exit 1
+    fi
+
+    if [[ "$(basename "$INSTALLER")" != "ZaloSetup.exe" ]]; then
+        zenity --error \
+            --title="Zalo Installer" \
+            --text="Vui lòng chọn đúng file ZaloSetup.exe"
+        exit 1
+    fi
+fi
+
+echo -e "${YELLOW}>> Creating Wine Prefix...${NC}"
+
+export WINEPREFIX="$PREFIX"
+export WINEARCH=win64
+
+if [ ! -d "$PREFIX" ]; then
+    wineboot -u
+fi
+
+echo -e "${YELLOW}>> Setting Windows 10...${NC}"
+winetricks -q win10
+
+echo -e "${YELLOW}>> Installing Core Fonts...${NC}"
+winetricks -q corefonts
+
+echo -e "${YELLOW}>> Running Zalo Installer...${NC}"
+wine "$INSTALLER"
 
 echo
 echo "Searching for Zalo.exe..."
