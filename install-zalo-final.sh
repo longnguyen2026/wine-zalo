@@ -51,29 +51,6 @@ wget \
 curl \
 unzip
 
-if [ ! -f "$ZALO" ]; then
-    zenity --error \
-    --title="Zalo Installer" \
-    --text="Không tìm thấy:\n$ZALO"
-    exit 1
-fi
-
-echo -e "${YELLOW}>> Creating Wine Prefix...${NC}"
-
-export WINEPREFIX="$PREFIX"
-export WINEARCH=win64
-
-if [ ! -d "$PREFIX" ]; then
-    wineboot -u
-fi
-
-echo -e "${YELLOW}>> Setting Windows 10...${NC}"
-winetricks -q win10
-
-echo -e "${YELLOW}>> Installing Core Fonts...${NC}"
-winetricks -q corefonts
-
-echo -e "${YELLOW}>> Running Zalo Installer...${NC}"
 echo -e "${YELLOW}>> Finding ZaloSetup.exe...${NC}"
 
 INSTALLER="$HOME/Downloads/ZaloSetup.exe"
